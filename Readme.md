@@ -1,4 +1,4 @@
-# SW: A simple Web Framework
+# SW: A simple web Framework
 
 -----
 
@@ -8,7 +8,7 @@ sw try to use the official library as much as possible
 
 ````
     app := sw.NewApp()
-    app.GET("/hello1", func(this *web.This) {
+    app.GET("/hello1", func(this *sw.This) {
         data := sw.M{
             "hello": "world",
         }
@@ -25,7 +25,7 @@ sw try to use the official library as much as possible
     app := sw.NewApp()
     group1 := app.Group("/test1/")
     {
-        group1.GET("/hello1", func(this *web.This) {
+        group1.GET("/hello1", func(this *sw.This) {
             data := sw.M{
                 "hello": "world",
             }
@@ -41,7 +41,7 @@ sw try to use the official library as much as possible
 
 ````
     app := sw.NewApp()
-    app.Use(sw.Cors()).GET("/hello1", func(this *web.This) {
+    app.Use(sw.Cors()).GET("/hello1", func(this *sw.This) {
         data := sw.M{
             "hello": "world",
         }
@@ -56,7 +56,7 @@ sw try to use the official library as much as possible
 
 ````
     app := sw.NewApp()
-    app.Use(sw.BasicAuth("abc","123")).GET("/hello1", func(this *web.This) {
+    app.Use(sw.BasicAuth("abc","123")).GET("/hello1", func(this *sw.This) {
         data := sw.M{
             "hello": "world",
         }
@@ -90,7 +90,7 @@ var Files embed.FS
 
 ````
     app := sw.NewApp()
-    app.GET("/users/:name", func(this *web.This) {
+    app.GET("/users/:name", func(this *sw.This) {
         user := this.Param("name","zhang")
         this.Html(http.StatusOK, user)
     })
@@ -104,7 +104,7 @@ var Files embed.FS
 
 ````
     app := sw.NewApp()
-    app.GET("/list", func(this *web.This) {
+    app.GET("/list", func(this *sw.This) {
         pg := this.Path("page","1")
         this.Html(http.StatusOK, pg)
     })
@@ -124,7 +124,7 @@ curl http://localhost:8999/list?page=2
 
 ````
     app := sw.NewApp()
-    app.POST("/new-user", func(this *web.This) {
+    app.POST("/new-user", func(this *sw.This) {
         param := Param1{}
         if err := this.ParseForm(&param); err != nil {
             log.Println(err)
@@ -140,7 +140,7 @@ curl http://localhost:8999/list?page=2
 
 ````
     app := sw.NewApp()
-    app.POST("/new-user", func(this *web.This) {
+    app.POST("/new-user", func(this *sw.This) {
         param := Param1{}
         if err := this.ParseJson(&param); err != nil {
             log.Println(err)
