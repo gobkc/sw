@@ -4,7 +4,7 @@
 
 sw try to use the official library as much as possible
 
-####  step 1. Hello World
+#### step 1. Hello World
 
 ````
     app := sw.NewApp()
@@ -19,25 +19,25 @@ sw try to use the official library as much as possible
     }
 ````
 
-####  step 2. Use routing group
+#### step 2. Use routing group
 
 ````
-	app := sw.NewApp()
-	group1 := app.Group("/test1/")
-	{
-		group1.GET("/hello1", func(this *web.This) {
-			data := web.M{
+    app := sw.NewApp()
+    group1 := app.Group("/test1/")
+    {
+        group1.GET("/hello1", func(this *web.This) {
+            data := sw.M{
                 "hello": "world",
-			}
-			this.Json(http.StatusOK, data)
-		})
-	}
-	if err := app.Run(":8999"); err != nil {
-		log.Println(err.Error())
-	}
+            }
+            this.Json(http.StatusOK, data)
+        })
+    }
+    if err := app.Run(":8999"); err != nil {
+        log.Println(err.Error())
+    }
 ````
 
-####  step 3. Cross domain -> using built-in middleware
+#### step 3. Cross domain -> using built-in middleware
 
 ````
     app := sw.NewApp()
@@ -52,7 +52,7 @@ sw try to use the official library as much as possible
     }
 ````
 
-####  step 4. Basic Auth -> using built-in middleware
+#### step 4. Basic Auth -> using built-in middleware
 
 ````
     app := sw.NewApp()
@@ -67,14 +67,17 @@ sw try to use the official library as much as possible
     }
 ````
 
+#### step 5. Support Vue -> using built-in routing
 
-####  step 5. Support Vue -> using built-in routing
 - First, define public variables
+
 ````
 //go:embed static/*
 var Files embed.FS
 ````
+
 - using built-in routing
+
 ````
     app := sw.NewApp()
     app.VUE("./static", &Files)
@@ -83,7 +86,8 @@ var Files embed.FS
     }
 ````
 
-####  step 6. Get routing parameters
+#### step 6. Get routing parameters
+
 ````
     app := sw.NewApp()
     app.GET("/users/:name", func(this *web.This) {
@@ -96,8 +100,8 @@ var Files embed.FS
 
 ````
 
+#### step 7. "GET" parameters
 
-####  step 7. "GET" parameters
 ````
     app := sw.NewApp()
     app.GET("/list", func(this *web.This) {
@@ -109,38 +113,39 @@ var Files embed.FS
     }
 
 ````
+
 - testing
+
 ````
 curl http://localhost:8999/list?page=2
 ````
 
-####  step 8. "POST" parameters(form)
+#### step 8. "POST" parameters(form)
+
 ````
     app := sw.NewApp()
     app.POST("/new-user", func(this *web.This) {
-    	param := Param1{
-		}
-		if err := this.ParseForm(&param); err != nil {
-			log.Println(err)
-		}
-		this.Json(http.StatusOK, param)
+        param := Param1{}
+        if err := this.ParseForm(&param); err != nil {
+            log.Println(err)
+        }
+        this.Json(http.StatusOK, param)
     })
     if err := app.Run(":8999"); err != nil {
         log.Println(err.Error())
     }
 ````
 
+#### step 9. "POST" parameters(json)
 
-####  step 9. "POST" parameters(json)
 ````
     app := sw.NewApp()
     app.POST("/new-user", func(this *web.This) {
-    	param := Param1{
-		}
-		if err := this.ParseJson(&param); err != nil {
-			log.Println(err)
-		}
-		this.Json(http.StatusOK, param)
+        param := Param1{}
+        if err := this.ParseJson(&param); err != nil {
+            log.Println(err)
+        }
+        this.Json(http.StatusOK, param)
     })
     if err := app.Run(":8999"); err != nil {
         log.Println(err.Error())
