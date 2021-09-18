@@ -7,16 +7,16 @@ sw try to use the official library as much as possible
 ####  step 1. Hello World
 
 ````
-	app := sw.NewApp()
+    app := sw.NewApp()
     app.GET("/hello1", func(this *web.This) {
         data := sw.M{
             "hello": "world",
         }
         this.Json(http.StatusOK, data)
     })
-	if err := app.Run(":8999"); err != nil {
-		log.Println(err.Error())
-	}
+    if err := app.Run(":8999"); err != nil {
+        log.Println(err.Error())
+    }
 ````
 
 ####  step 2. Use routing group
@@ -40,31 +40,31 @@ sw try to use the official library as much as possible
 ####  step 3. Cross domain -> using built-in middleware
 
 ````
-	app := sw.NewApp()
+    app := sw.NewApp()
     app.Use(sw.Cors()).GET("/hello1", func(this *web.This) {
         data := sw.M{
             "hello": "world",
         }
         this.Json(http.StatusOK, data)
     })
-	if err := app.Run(":8999"); err != nil {
-		log.Println(err.Error())
-	}
+    if err := app.Run(":8999"); err != nil {
+        log.Println(err.Error())
+    }
 ````
 
 ####  step 4. Basic Auth -> using built-in middleware
 
 ````
-	app := sw.NewApp()
+    app := sw.NewApp()
     app.Use(sw.BasicAuth("abc","123")).GET("/hello1", func(this *web.This) {
         data := sw.M{
             "hello": "world",
         }
         this.Json(http.StatusOK, data)
     })
-	if err := app.Run(":8999"); err != nil {
-		log.Println(err.Error())
-	}
+    if err := app.Run(":8999"); err != nil {
+        log.Println(err.Error())
+    }
 ````
 
 
@@ -76,23 +76,23 @@ var Files embed.FS
 ````
 - using built-in routing
 ````
-	app := sw.NewApp()
-	app.VUE("./static", &Files)
-	if err := app.Run(":8999"); err != nil {
-		log.Println(err.Error())
-	}
+    app := sw.NewApp()
+    app.VUE("./static", &Files)
+    if err := app.Run(":8999"); err != nil {
+        log.Println(err.Error())
+    }
 ````
 
 ####  step 6. Get routing parameters
 ````
     app := sw.NewApp()
     app.GET("/users/:name", func(this *web.This) {
-    	user := this.Param("name","zhang")
-		this.Html(http.StatusOK, user)
+        user := this.Param("name","zhang")
+        this.Html(http.StatusOK, user)
     })
-	if err := app.Run(":8999"); err != nil {
-		log.Println(err.Error())
-	}
+    if err := app.Run(":8999"); err != nil {
+        log.Println(err.Error())
+    }
 
 ````
 
@@ -101,12 +101,12 @@ var Files embed.FS
 ````
     app := sw.NewApp()
     app.GET("/list", func(this *web.This) {
-    	pg := this.Path("page","1")
-		this.Html(http.StatusOK, pg)
+        pg := this.Path("page","1")
+        this.Html(http.StatusOK, pg)
     })
-	if err := app.Run(":8999"); err != nil {
-		log.Println(err.Error())
-	}
+    if err := app.Run(":8999"); err != nil {
+        log.Println(err.Error())
+    }
 
 ````
 - testing
@@ -125,9 +125,9 @@ curl http://localhost:8999/list?page=2
 		}
 		this.Json(http.StatusOK, param)
     })
-	if err := app.Run(":8999"); err != nil {
-		log.Println(err.Error())
-	}
+    if err := app.Run(":8999"); err != nil {
+        log.Println(err.Error())
+    }
 ````
 
 
@@ -142,8 +142,8 @@ curl http://localhost:8999/list?page=2
 		}
 		this.Json(http.StatusOK, param)
     })
-	if err := app.Run(":8999"); err != nil {
-		log.Println(err.Error())
-	}
+    if err := app.Run(":8999"); err != nil {
+        log.Println(err.Error())
+    }
 ````
 
