@@ -1,0 +1,16 @@
+*.tar
+*.tar.gz
+
+__debug_*
+.env.local
+.env.*.local
+
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+.editorconfig
