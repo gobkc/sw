@@ -54,7 +54,7 @@ func (r Route) parseRoute(key string) (regexpKeys []string, paramKeys []string, 
 		if len(k) > 0 {
 			tmp := matchKeys[i]
 			if k[0:1] == ":" {
-				matchKeys[i] = "([a-zA-Z0-9.]*)"
+				matchKeys[i] = "([a-zA-Z0-9.-]*)"
 				paramKeys = append(paramKeys, k[1:])
 				tmp = "*"
 			}
