@@ -119,7 +119,7 @@ func (h HandlerContainer) FindFirstEle(findEle string, elementList []ActiveEleme
 		fail()
 	}
 	for i, element := range elementList {
-		if findEle == element.FirstElement {
+		if findEle == element.FirstElement || element.FirstElement == "*" {
 			result = func(success func(msg ActiveElement), fail func()) {
 				success(elementList[i])
 			}
